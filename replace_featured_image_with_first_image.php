@@ -68,6 +68,9 @@ foreach ( $myposts as $post ) : setup_postdata( $post );
 				'guid' => $local_url
 			 );
 			$attach_id = wp_insert_attachment( $attachment, $filename );
+			require_once( ABSPATH."wp-admin/includes/image.php" );
+			$attach_data = wp_generate_attachment_metadata( $attach_id, $filename );
+			wp_update_attachment_metadata( $attach_id, $attach_data );
 
 			set_post_thumbnail($post->ID, $attach_id );
 		}
